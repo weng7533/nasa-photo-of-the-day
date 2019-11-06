@@ -22,9 +22,9 @@ function App() {
 
       <h1 className="App-header"> Astronomy Picture of the Day </h1>
       <Photo pic={data.hdurl} />
-      <p>
-        <Content date={data.date} explanation={data.explanation} title={data.title} />
-      </p>
+
+      <Content date={data.date} explanation={data.explanation} title={data.title} />
+
     </div >
   );
 }

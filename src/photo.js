@@ -15,7 +15,7 @@ const photo = (props) => {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                height: '100%',
+                height: 'auto',
                 width: '100%',
                 // objectFit: 'cover',
             }}

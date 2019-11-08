@@ -44,6 +44,22 @@ import now from "performance-now";
 
 
 
+
+
+const WrapperDiv = styled.div`
+background-color: #000000;
+
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+font-size: calc(20px + 2vmin);
+color: white;
+padding: 2rem;
+margin: 0;
+`;
+
+
 function App() {
   const [data, Setdata] = useState([]);
   const [pic, setPic] = useState([]);
@@ -85,7 +101,7 @@ function App() {
 
     <div className="App">
 
-      <h1 className="App-header"> Astronomy Picture of the Day </h1>
+      <WrapperDiv><h1 > Astronomy Picture of the Day </h1></WrapperDiv>
 
 
 

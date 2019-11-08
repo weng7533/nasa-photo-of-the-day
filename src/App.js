@@ -5,7 +5,7 @@ import axios from "axios";
 import Photo from './photo';
 import Content from './content';
 import MyButton from './ButtonLeft';
-import { Progress } from 'reactstrap';
+import { Button } from 'reactstrap';
 import styled from 'styled-components';
 import now from "performance-now";
 
@@ -47,24 +47,24 @@ import now from "performance-now";
 function App() {
   const [data, Setdata] = useState([]);
   const [pic, setPic] = useState([]);
-  const [date, Setdate] = useState();
-  const [rightDate, SetRightDate] = useState(`2019-10-07`);
+  const [date, Setdate] = useState(new Date());
+
+  const [number, setNumber] = useState(0);
 
 
-  let now = new Date();
-  now.setDate(now.getDate() - 5);
-  console.log(`---> ${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`);
+  console.log(`date ---> ${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`);
 
   useEffect(() => {
 
+    date.setDate(date.getDate() + number)
+    setNumber(0);
+    console.log(`number ${number}`)
 
-    SetRightDate(`${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`);
-    console.log(`rightDate => ${rightDate}`)
-    axios.get("https://api.nasa.gov/planetary/apod?api_key=2ybV59HuoL6yR2zzBjE26HChHf1BZVKuSjUlCDTB&date=" + rightDate)
+
+    axios.get("https://api.nasa.gov/planetary/apod?api_key=2ybV59HuoL6yR2zzBjE26HChHf1BZVKuSjUlCDTB&date=" + `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`)
       .then(res => {
 
-        console.log(res);
-        console.log(`data date -> ${res.data.date}`)
+
         Setdata(res.data)
 
 
@@ -72,20 +72,27 @@ function App() {
         // Setdate(now.getDate())
         // console.log(`${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`)
         // SetRightDate(`${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`);
-        console.log(rightDate);
+
 
 
 
       })
 
-  }, [])
+  }, [number])
+
 
   return (
+
     <div className="App">
-      {/* <TestingButton>Nice One</TestingButton>
-      <Button2 type="primary" >testing</Button2> */}
+
       <h1 className="App-header"> Astronomy Picture of the Day </h1>
-      <MyButton pic={data.hdurl} />
+
+
+
+
+      <Button color="danger" onClick={() => setNumber(number - 1)}>{`<- Last Day`}</Button>{' '}
+      <Button color="danger" onClick={() => setNumber(number + 1)}>{`Next Day ->`}</Button>{' '}
+
       <Photo pic={data.hdurl} />
       <Content date={data.date} explanation={data.explanation} title={data.title} />
 
